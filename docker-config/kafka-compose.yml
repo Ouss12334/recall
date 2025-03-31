@@ -1,0 +1,128 @@
+# ignore error when testing with cmd locally
+# main ERROR Reconfiguration failed: No configuration found for '2c7b84de' at 'null' in 'null'
+
+##########################################################
+########## single node config convinient mode ############
+##########################################################
+# compose for single container with 3 partitions + exposed = docker run -d -p 9092:9092 --name broker apache/kafka:latest
+### need to continue reading docker docks to see on the required env variable KAFKA_INTER_BROKER_LISTENER_NAME on N partitions
+### ERR org.apache.kafka.common.errors.TimeoutException: Timed out waiting for a node assignment
+# services:
+#   broker:
+#     image: apache/kafka:latest
+#     container_name: broker
+#     # hostname: broker
+#     ports:
+#       - 9092:9092
+#     environment:
+#       KAFKA_NODE_ID: 123
+#       KAFKA_PROCESS_ROLES: broker,controller
+#       KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093 # //localhost: = //:
+#       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092 # //localhost: <> //: 
+#       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+#       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT # optional: existing+ ,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
+#       KAFKA_CONTROLLER_QUORUM_VOTERS: 123@localhost:9093
+#       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT # required 
+#       KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+#       # KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+#       # KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+#       # KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+#       # KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+#       KAFKA_NUM_PARTITIONS: 3
+#       # CLUSTER_ID: 698Yl1G5RP6mRUu-tDVTVQ
+    
+##########################################################
+#### multi node config seperate broker and controller ####
+##########################################################
+
+services:
+  controller-1:
+    image: apache/kafka:latest
+    container_name: controller-1
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: controller
+      KAFKA_LISTENERS: CONTROLLER://:9093 
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@controller-1:9093,2@controller-2:9093,3@controller-3:9093
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+
+  controller-2:
+    image: apache/kafka:latest
+    container_name: controller-2
+    environment:
+      KAFKA_NODE_ID: 2
+      KAFKA_PROCESS_ROLES: controller
+      KAFKA_LISTENERS: CONTROLLER://:9093 
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@controller-1:9093,2@controller-2:9093,3@controller-3:9093
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+    
+  controller-3:
+    image: apache/kafka:latest
+    container_name: controller-3
+    environment:
+      KAFKA_NODE_ID: 3
+      KAFKA_PROCESS_ROLES: controller
+      KAFKA_LISTENERS: CONTROLLER://:9093 
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@controller-1:9093,2@controller-2:9093,3@controller-3:9093
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+  
+  broker-1:
+    image: apache/kafka:latest
+    container_name: broker-1
+    ports:
+      - 29092:9092
+    environment:
+      KAFKA_NODE_ID: 4
+      KAFKA_PROCESS_ROLES: broker
+      KAFKA_LISTENERS: OUTSIDE_TO_BROKER_COMM://:9092,BROKER_TO_BROKER_COMM://:19092
+      KAFKA_ADVERTISED_LISTENERS: OUTSIDE_TO_BROKER_COMM://localhost:29092,BROKER_TO_BROKER_COMM://broker-1:19092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,BROKER_TO_BROKER_COMM:PLAINTEXT,OUTSIDE_TO_BROKER_COMM:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@controller-1:9093,2@controller-2:9093,3@controller-3:9093
+      KAFKA_INTER_BROKER_LISTENER_NAME: BROKER_TO_BROKER_COMM
+    depends_on:
+      - controller-1
+      - controller-2
+      - controller-3
+
+  broker-2:
+    image: apache/kafka:latest
+    container_name: broker-2
+    ports:
+      - 39092:9092
+    environment:
+      KAFKA_NODE_ID: 5
+      KAFKA_PROCESS_ROLES: broker
+      KAFKA_LISTENERS: OUTSIDE_TO_BROKER_COMM://:9092,BROKER_TO_BROKER_COMM://:19092
+      KAFKA_ADVERTISED_LISTENERS: OUTSIDE_TO_BROKER_COMM://localhost:39092,BROKER_TO_BROKER_COMM://broker-2:19092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,BROKER_TO_BROKER_COMM:PLAINTEXT,OUTSIDE_TO_BROKER_COMM:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@controller-1:9093,2@controller-2:9093,3@controller-3:9093
+      KAFKA_INTER_BROKER_LISTENER_NAME: BROKER_TO_BROKER_COMM
+    depends_on:
+      - controller-1
+      - controller-2
+      - controller-3
+
+
+  broker-3:
+    image: apache/kafka:latest
+    container_name: broker-3
+    ports:
+      - 49092:9092
+    environment:
+      KAFKA_NODE_ID: 6
+      KAFKA_PROCESS_ROLES: broker
+      KAFKA_LISTENERS: OUTSIDE_TO_BROKER_COMM://:9092,BROKER_TO_BROKER_COMM://:19092
+      KAFKA_ADVERTISED_LISTENERS: OUTSIDE_TO_BROKER_COMM://localhost:49092,BROKER_TO_BROKER_COMM://broker-3:19092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,BROKER_TO_BROKER_COMM:PLAINTEXT,OUTSIDE_TO_BROKER_COMM:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@controller-1:9093,2@controller-2:9093,3@controller-3:9093
+      KAFKA_INTER_BROKER_LISTENER_NAME: BROKER_TO_BROKER_COMM
+    depends_on:
+      - controller-1
+      - controller-2
+      - controller-3

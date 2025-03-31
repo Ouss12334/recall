@@ -1,5 +1,6 @@
 package com.slope.recall;
 
+import org.apache.kafka.clients.admin.AdminClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
