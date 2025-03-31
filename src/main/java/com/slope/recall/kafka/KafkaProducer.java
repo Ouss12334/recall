@@ -1,6 +1,5 @@
 package com.slope.recall.kafka;
 
-import org.apache.kafka.clients.admin.AdminClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.kafka.core.KafkaAdmin;

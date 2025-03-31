@@ -1,7 +1,5 @@
 package com.slope.recall.data;
 
-import org.springframework.data.annotation.Id;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +20,7 @@ public class Hello {
     private String id;
     private String who;
 
+    @SuppressWarnings("unused")
     private void setId(String id) { 
         // do nothing  to block setting id by @Data
     }
