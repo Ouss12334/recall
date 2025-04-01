@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.slope.recall.data.GitHubUser;
 import com.slope.recall.interfaces.IGitServiceWithGenerics;
+import com.slope.recall.interfaces.PrefixGitName;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,10 +32,16 @@ public class GitHubAsyncRunChecker {
             // wait all to be done
             CompletableFuture.allOf(myUser, springOrg, randomPythonDev/*, notReal*/).join();
 
+            // implementing and using functional interface
+            PrefixGitName prefixer = (name) -> {
+                return "github-".concat(name);
+            };
+
+            // log response + transformation with functional interface
             log.info("Elapsed time {}", System.currentTimeMillis() - startTime);
-            log.info(myUser.get().toString());
-            log.info(springOrg.get().toString());
-            log.info(randomPythonDev.get().toString());
+            log.info("transformed name {}, {}", prefixer.transform(myUser.get().name()), myUser.get().toString());
+            log.info("transformed name {}, {}", prefixer.transform(springOrg.get().name()), springOrg.get().toString());
+            log.info("transformed name {}, {}", prefixer.transform(randomPythonDev.get().name()), randomPythonDev.get().toString());
         };
     }
 
