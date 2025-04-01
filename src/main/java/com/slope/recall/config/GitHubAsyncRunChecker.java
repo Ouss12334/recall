@@ -2,11 +2,9 @@ package com.slope.recall.config;
 
 import java.util.concurrent.CompletableFuture;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 import com.slope.recall.data.GitHubUser;
 import com.slope.recall.interfaces.IGitServiceWithGenerics;

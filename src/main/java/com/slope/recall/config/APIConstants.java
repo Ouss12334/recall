@@ -1,8 +1,6 @@
 package com.slope.recall.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.bind.Name;
 import org.springframework.context.annotation.Configuration;
 
 import lombok.Data;
