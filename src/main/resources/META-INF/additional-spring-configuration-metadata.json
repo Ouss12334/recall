@@ -1,0 +1,16 @@
+{"properties": [
+  {
+    "name": "scheduled.cron.break-time",
+    "type": "java.lang.String",
+    "description": "A description for 'scheduled.cron.break-time'"
+  },
+  {
+    "name": "scheduled.cron.message",
+    "type": "java.lang.String",
+    "description": "A description for 'scheduled.cron.message'"
+  },
+  {
+    "name": "external-apis.github-user-url",
+    "type": "java.lang.String"
+  }
+]}

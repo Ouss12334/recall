@@ -12,3 +12,11 @@ spring:
 logging:
   level:
     '[com.slope.recall]': debug
+
+scheduled:
+    cron:
+        break-time: 0 0 12-19 * * MON-FRI
+        message: 0 */10 9-12,14-18 * * MON-FRI
+
+external-apis:
+    github-user-url: "https://api.github.com/users/"
