@@ -1,4 +1,4 @@
-package com.slope.recall.service;
+package com.slope.recall.interfaces;
 
 import java.util.List;
 

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.slope.recall.data.KafkaMessage;
-import com.slope.recall.service.IKafkaCombinedService;
+import com.slope.recall.interfaces.IKafkaCombinedService;
 
 import lombok.extern.slf4j.Slf4j;
 

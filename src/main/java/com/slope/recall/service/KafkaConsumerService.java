@@ -4,6 +4,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import com.slope.recall.config.Constants;
+import com.slope.recall.interfaces.IKafkaCombinedService;
 
 import lombok.extern.slf4j.Slf4j;
 

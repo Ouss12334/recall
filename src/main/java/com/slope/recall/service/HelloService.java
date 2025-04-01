@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.slope.recall.data.Hello;
+import com.slope.recall.interfaces.IHelloService;
 import com.slope.recall.repository.HelloRepository;
 
 import lombok.extern.slf4j.Slf4j;

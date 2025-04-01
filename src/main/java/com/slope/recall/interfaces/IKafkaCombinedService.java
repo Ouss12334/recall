@@ -1,4 +1,4 @@
-package com.slope.recall.service;
+package com.slope.recall.interfaces;
 
 // acts as producer and consumer (for testing purposes)
 

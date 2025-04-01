@@ -9,8 +9,9 @@ import com.slope.recall.repository.HelloRepository;
 
 @Configuration
 public class InitDB {
+    // cannot be private
     @Bean
-    private CommandLineRunner initItems(HelloRepository repository) {
+    CommandLineRunner initItems(HelloRepository repository) {
         return (args) -> {
             repository.save(Hello.builder().who("guardians of the galaxy").build());
             repository.save(Hello.builder().who("guardians of the galaxy vol. 2").build());
