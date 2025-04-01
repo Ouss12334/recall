@@ -1,7 +1,5 @@
 package com.slope.recall.config;
 
-import java.nio.charset.Charset;
-
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
