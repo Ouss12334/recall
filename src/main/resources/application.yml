@@ -8,10 +8,6 @@ spring:
             - localhost:49092
         consumer:
             group-id: my-recall-id
-    output:
-        ansi:
-            enabled: always
-
 logging:
   level:
     '[com.slope.recall]': debug
