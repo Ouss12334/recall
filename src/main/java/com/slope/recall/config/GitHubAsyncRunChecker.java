@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.slope.recall.annotations.ValidGitURL;
 import com.slope.recall.data.GitHubUser;
 import com.slope.recall.interfaces.IGitServiceWithGenerics;
 import com.slope.recall.interfaces.PrefixGitName;
@@ -37,11 +38,14 @@ public class GitHubAsyncRunChecker {
                 return "github-".concat(name);
             };
 
+            var gitMyUser = myUser.get();
+            var gitSpringOrg = springOrg.get();
+            var gitEmilk = randomPythonDev.get();
             // log response + transformation with functional interface
             log.info("Elapsed time {}", System.currentTimeMillis() - startTime);
-            log.info("transformed name {}, {}", prefixer.transform(myUser.get().name()), myUser.get().toString());
-            log.info("transformed name {}, {}", prefixer.transform(springOrg.get().name()), springOrg.get().toString());
-            log.info("transformed name {}, {}", prefixer.transform(randomPythonDev.get().name()), randomPythonDev.get().toString());
+            log.info("transformed name {}, {}", prefixer.transform(gitMyUser.name()), gitMyUser.toString());
+            log.info("transformed name {}, {}", prefixer.transform(gitSpringOrg.name()), gitSpringOrg.toString());
+            log.info("transformed name {}, {}", prefixer.transform(gitEmilk.name()), gitEmilk.toString());
         };
     }
 
