@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import com.slope.recall.data.GitHubUser;
 
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 
 /**

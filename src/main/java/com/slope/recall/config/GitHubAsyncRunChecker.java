@@ -6,7 +6,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.slope.recall.annotations.ValidGitURL;
 import com.slope.recall.data.GitHubUser;
 import com.slope.recall.interfaces.IGitServiceWithGenerics;
 import com.slope.recall.interfaces.PrefixGitName;
