@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/kafka")
 public class KafkaController {
 
-    @Autowired
+    @Autowired // best on ctor // kept for tests
     private IKafkaCombinedService kafkaProducerService;
 
     @PostMapping("/send")

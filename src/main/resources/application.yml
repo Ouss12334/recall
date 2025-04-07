@@ -24,3 +24,10 @@ scheduled:
 external-apis:
     github-user-url: "https://api.github.com/users/"
     
+server:
+    port: 8081
+
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://localhost:8991/eureka
