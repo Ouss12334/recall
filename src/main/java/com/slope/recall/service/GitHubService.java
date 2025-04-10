@@ -34,4 +34,9 @@ public class GitHubService implements IGitServiceWithGenerics {
         return CompletableFuture.completedFuture(result);
     }
 
+    @Override // custom tostring method
+    public String toString() {
+        return "GitHubService [getClass()=" + getClass() + "]";
+    }
+
 }
