@@ -9,3 +9,5 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_TCP_PORT: 3306
+      # required to login with vs code plugin
+      MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
