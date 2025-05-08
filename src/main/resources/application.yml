@@ -2,10 +2,11 @@ spring:
     application:
         name: recall
     kafka:
-        bootstrap-servers: 
-            - localhost:29092
-            - localhost:39092
-            - localhost:49092
+        bootstrap-servers:
+            - localhost:9092 # convenient mode
+            # - localhost:29092
+            # - localhost:39092
+            # - localhost:49092
         consumer:
             group-id: my-recall-id
     output:
@@ -25,7 +26,7 @@ scheduled:
 
 external-apis:
     github-user-url: "https://api.github.com/users/"
-    
+
 server:
     port: 8081
 
