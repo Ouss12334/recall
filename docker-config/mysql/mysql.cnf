@@ -1,0 +1,15 @@
+# use SHOW VARIABLES; query on the system db to verify values
+[mysqld]
+lower_case_table_names          = 1
+# performance for batch inserts https://dba.stackexchange.com/questions/217047/
+skip-log-bin
+skip-innodb-doublewrite
+transaction_isolation = READ-COMMITTED
+innodb_flush_log_at_trx_commit  = 0
+# buffer-pool-size must be a multiple of chunk*instances https://dev.mysql.com/doc/refman/8.4/en/innodb-buffer-pool-resize.html or gets rounded automatically
+innodb_buffer_pool_size         = 12G 
+innodb_buffer_pool_instances    = 16
+secure_file_priv                = ""
+innodb_read_io_threads          = 64
+innodb_write_io_threads         = 64
+innodb_io_capacity              = 5000
