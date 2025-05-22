@@ -12,4 +12,4 @@ innodb_buffer_pool_instances    = 16
 secure_file_priv                = ""
 innodb_read_io_threads          = 64
 innodb_write_io_threads         = 64
-innodb_io_capacity              = 5000
+innodb_io_capacity              = 10000 # default
