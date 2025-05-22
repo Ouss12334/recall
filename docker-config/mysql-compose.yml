@@ -8,7 +8,7 @@ services:
     ports:
     - 3306:3306
     volumes:
-      - C:\Users\Oussama TURKI\OneDrive - Quanteam\Documents\workspace\recall\docker-config\mysql\:/etc/mysql/conf.d/
+      - .\mysql\:/etc/mysql/conf.d/
     # replacing below with volumes because more conf
     # command: ['mysqld', '--lower_case_table_names=1', '--skip-log-bin'] # lower-case only works if new instance/container
     environment:
