@@ -1,3 +1,4 @@
+# equivalent of my.ini if mysql was locally installed 
 # use SHOW VARIABLES; query on the system db to verify values
 [mysqld]
 lower_case_table_names          = 1
@@ -13,3 +14,9 @@ secure_file_priv                = ""
 innodb_read_io_threads          = 64
 innodb_write_io_threads         = 64
 innodb_io_capacity              = 10000 # default
+# disable redo log https://dev.mysql.com/doc/refman/8.4/en/innodb-redo-log.html#:~:text=archive%20file%20resides.-,Disabling%20Redo%20Logging,log%20writes%20and%20doublewrite%20buffering.
+# disable redo logging using the ALTER INSTANCE DISABLE INNODB REDO_LOG statement
+# This functionality is intended for loading data into a new MySQL instance. 
+# Disabling redo logging speeds up data loading by avoiding redo log writes and doublewrite buffering.
+# disables globally 
+# check with SHOW GLOBAL STATUS LIKE 'Innodb_redo_log_enabled';
